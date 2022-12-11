@@ -11,7 +11,7 @@ I have sampled **CSI_DATASET** (you can find it in my repo) from https://ieee-da
 Dataset description you can find on the website. Note that all 64 antennas are not in phase.
 **CSI dataset** consist of multiple csi data samples for training and validation. Decentralized models have training dataset of size 17000 and validation dataset of size 1500 csi datasamples.
 
-![alt text](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/csi_data_and_fft.png)
+![Example of 1 data sample](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/csi_data_and_fft.png)
 
 # Observations during simulations.
 ---
