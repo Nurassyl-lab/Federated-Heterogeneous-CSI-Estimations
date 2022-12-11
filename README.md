@@ -1,3 +1,6 @@
+# Introduction
+---
+
 This repository contains data split python code that is used for splitting MaMIMO CSI dataset. (CSI - channel state information)
 link to a dataset -> https://ieee-dataport.org/open-access/ultra-dense-indoor-mamimo-csi-dataset
 
