@@ -40,4 +40,4 @@ Right now i'm still running simulations, I will add more infomation regarding th
 
 # My observations
 ---
-Graveyard of failed ideas.
+Graveyard of failed ideas. 
