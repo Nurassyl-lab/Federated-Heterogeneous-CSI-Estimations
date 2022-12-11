@@ -23,10 +23,9 @@ Plot of signal's magnitude in dB over 100 subcarriers of 1 antennas.
 Plot of signal's phase in degrees over 100 subcarriers of 1 antennas.
 ![data2](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/phase_subcarriers_data_over_1_antenna.png)
 
-# Observations during simulations.
+# My observations
 ---
-This part is not related to the project, and I do not implement any algorithms, methods, or ideas that I mention in this section.
-These are just my failed ideas.
+Graveyard of failed ideas.
 
 
 
