@@ -12,9 +12,9 @@ Dataset description you can find on the website. Note that all 64 antennas are n
 **CSI dataset** consist of multiple csi data samples for training and validation. Decentralized models have training dataset of size 17000 and validation dataset of size 1500 csi datasamples.
 
 # Observations during simulations.
+---
 This part is not related to the project, and I do not implement any algorithms, methods, or ideas that I mention in this section.
 These are just my failed ideas.
----
 
 
 
