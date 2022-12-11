@@ -11,7 +11,15 @@ I have sampled **CSI_DATASET** (you can find it in my repo) from https://ieee-da
 Dataset description you can find on the website. Note that all 64 antennas are not in phase.
 **CSI dataset** consist of multiple csi data samples for training and validation. Decentralized models have training dataset of size 17000 and validation dataset of size 1500 csi datasamples.
 
-![Example of 1 data sample](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/csi_data_and_fft.png)
+Visualization of csi data sample.
+64x100 matrix on the right and it's 2D DFT on the left. As you can see a 2D DFT is very sparse.
+![data1](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/csi_data_and_fft.png)
+
+Plot of magnitude in dB of signal's magnited over 100 subcarriers of 1 antennas.
+![data2](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/mag_subcarriers_data_over_1_antenna.png)
+
+Plot of magnitude in dB of signal's magnited over 100 subcarriers of 1 antennas.
+![data2](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/phase_subcarriers_data_over_1_antenna.png)
 
 # Observations during simulations.
 ---
