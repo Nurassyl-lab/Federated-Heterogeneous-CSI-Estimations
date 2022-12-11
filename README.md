@@ -16,7 +16,7 @@ Implementation of **Federated Learning** (a.k.a collaborative learning) for **CS
 ---
 **CSI** or **Channel State Information**, in wireless communications is the known channel properties of a communication link between transmitter and receiver. This information describes how a signal propagates from the transmitter to the receiver and represents the combined effect of, for example, scattering, fading, and power decay with distance. The CSI makes it possible to adapt transmissions to current channel conditions, which is crucial for achieving reliable communication with high data rates in multiantenna systems.
 
-I have sampled **CSI_DATASET** (you can find it in my repo) from https://ieee-dataport.org/open-access/ultra-dense-indoor-mamimo-csi-dataset
+I have sampled **CSI_DATASET** (i will add it soon) from https://ieee-dataport.org/open-access/ultra-dense-indoor-mamimo-csi-dataset
 
 Dataset description you can find on the website. Note that all 64 antennas are not in phase.
 **CSI dataset** consist of multiple csi data samples for training and validation. Decentralized models have training dataset of size 17000 and validation dataset of size 1500 csi datasamples.
