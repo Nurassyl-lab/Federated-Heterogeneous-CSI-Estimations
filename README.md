@@ -1,4 +1,10 @@
 Not finished yet!!!
+#Content:
+  1) Introduction
+  2) CSI dataset
+  3) Code description
+  4) My observations
+
 # Introduction
 ---
 Implementation of **Federated Learning** (a.k.a collaborative learning) for **CSI data** transmission between UE (user equipment) and BS (base station).
