@@ -1,5 +1,5 @@
 'Simulation of training decentralized(local) models'
-'Architrecture is Variational Autoencoder'
+'Architecture: Variational Autoencoder'
 
 'this code may provide you with information such as:'
 ' 1) local model performance for training and validation'
