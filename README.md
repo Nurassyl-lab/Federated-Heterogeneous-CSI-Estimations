@@ -43,8 +43,9 @@ Data heterogeneity describes the biasness of the data, and heterogeneity level o
 
 ![data2](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/heterogeeity_level.png)
 
-Setup 1: 
-
+### Setup 1: UE selection
+As for now only [setup 1] is available.
+In this case pre=trained encoders are delivered to UE (continue here)
 
 main2 python code smaller copy of the main file which is not yet included in this repository.
 You can use main2 to get familiar with our setup and etc.
