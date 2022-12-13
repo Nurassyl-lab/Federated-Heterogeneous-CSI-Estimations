@@ -33,6 +33,16 @@ Plot of signal's phase in degrees over 100 subcarriers of 1 antennas.
 
 # Code description
 ---
+for now only variational autoencoder simultion is available.
+Use VAE_simulation.py to train decentralized models. 
+
+In this project autoencoder architecture is implemented in order to compress the CSI data and transmit it from UE to BS.
+The goal of the project is to compress the data as much as possible and reach smallest reconstruction loss on the server.
+However, there is one detail that must be mentioned, it is data heterogeneity. Remember that each local model is trained on its own dataset. 
+
+Setup 1: 
+
+
 main2 python code smaller copy of the main file which is not yet included in this repository.
 You can use main2 to get familiar with our setup and etc.
 
