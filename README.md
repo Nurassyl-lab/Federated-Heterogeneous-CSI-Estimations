@@ -38,7 +38,7 @@ Use VAE_simulation.py to train decentralized models.
 
 In this project autoencoder architecture is implemented in order to compress the CSI data and transmit it from UE to BS.
 The goal of the project is to compress the data as much as possible and reach smallest reconstruction loss on the server.
-However, there is one detail that must be mentioned, it is data heterogeneity. Remember that each local model is trained on its own dataset. 
+However, there is one detail that must be mentioned, it is data heterogeneity. Remember that each local model is trained on its own dataset. This is done because in real life there won't be perfectly balanced UE dataset. (So, we also explore how biasness affects model performances)
 Data heterogeneity describes the biasness of the data, and heterogeneity level or (epsilon) is variable that describes the data heterogeneity in %.
 
 ![data2](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/heterogeeity_level.png)
