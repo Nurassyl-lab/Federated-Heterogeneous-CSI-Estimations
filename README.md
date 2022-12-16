@@ -1,6 +1,8 @@
 Not finished yet!!!
 DATASET will be added soon
 
+The repo may not be well organized. This is my first big project the file management is a bit chaotic ;(
+
 # Content:
   1) Introduction
   2) CSI dataset
