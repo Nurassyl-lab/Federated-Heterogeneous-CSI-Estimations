@@ -36,12 +36,12 @@ for het in heterogeneity:
     paths_to_load = []
     paths_to_save = []
     for clas in range(n_classes):
-        paths_to_load.append('competition data/unbalanced data/CLASS_'+str(clas+1)+'/het'+str(het)+'%/')
-    paths_to_save = 'competition data/unbalanced data/RESULTS/het'+str(het)+'%/train_data/'
+        paths_to_load.append('unbalanced data/CLASS_'+str(clas+1)+'/het'+str(het)+'%/')
+    paths_to_save = 'unbalanced data/RESULTS/het'+str(het)+'%/train_data/'
     
     ' *Create dataframe to save results '
     '.csv files will be updated with your performances...'
-    df = pd.read_csv('competition data/het'+str(het)+'.csv')
+    df = pd.read_csv('het'+str(het)+'.csv')
     df = df.set_index(['LOSSES'])
     ' *Load data & Start training '
     for iteration in iterations:      
