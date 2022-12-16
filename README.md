@@ -53,7 +53,9 @@ In our case we split dataset into 3 classes using L2-norm.
 
 ### Setup 1: UE selection
 As for now only [setup 1] is available.
-In this case pre=trained encoders are delivered to UE (continue here)
+In this case pre-trained encoders are delivered to UE. When UE receives signal that it needs to send to BS the following algorithm is being executed under setup 1. 
+UE compresses input using all 3 encoders that it has received. Now UE has 3 different encoded features of
+
 
 main2 python code smaller copy of the main file which is not yet included in this repository.
 You can use main2 to get familiar with our setup and etc.
