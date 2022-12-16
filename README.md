@@ -45,6 +45,7 @@ Data heterogeneity describes the biasness of the data, and heterogeneity level o
 
 In our case we split dataset into 3 classes using L2-norm.
   CLASS 1: csi data with l2-norm value in interval [40, 45]
+  
   CLASS 2: csi data with l2-norm value in interval [50, 55]
   CLASS 3: csi data with l2-norm value in interval [60, 65]
 
