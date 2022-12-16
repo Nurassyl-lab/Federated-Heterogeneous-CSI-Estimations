@@ -1,0 +1,10 @@
+LOSSES,data1,data2,data3
+model1,,,
+model2,,,
+model3,,,
+server_tanh_select_loss,,,
+server_soft_select_loss,,,
+server_norm_select_loss,,,
+server_tanh_select_count,,,
+server_soft_select_count,,,
+server_norm_select_count,,,
