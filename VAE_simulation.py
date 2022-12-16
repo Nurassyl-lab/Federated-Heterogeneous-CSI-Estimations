@@ -25,9 +25,9 @@ n_classes = 3 #depends on how many decentralized models you aim to train,
               #note that your dataset should have same amount of classes
 VAE = True
 
-train_model = False # if you have pre-trained models set load_model to True
+train_model = True # if you have pre-trained models set train_models to False
 
-norms = np.array([np.arange(40,45), np.arange(50,55), np.arange(60,65)])
+# norms = np.array([np.arange(40,45), np.arange(50,55), np.arange(60,65)])
 
 'start training and estimating'
 for het in heterogeneity:
@@ -74,21 +74,21 @@ for het in heterogeneity:
             ' *each model one-by-one '
             for clas in main_server.classes:
                 print("Loading vae model for class", clas.number)
-                clas.model = keras.models.s(paths_to_load+'model')
+                clas.model = keras.models(paths_to_load+'model')
         else:
             for clas in main_server.classes:
                 print(clas.number,"class is training")
                 
                 # for VAE the data is going to be split into real and complex parts, 
                 # and will be trained separately
-                train_data_real = clas.train_data.real.reshape(len(clas.train_data), 64, 100, 1)
-                train_data_imag = clas.train_data.imag.reshape(len(clas.train_data), 64, 100, 1)
-                val_data_real = clas.val_data.real.reshape(len(clas.val_data), 64, 100, 1)
-                val_data_imag = clas.val_data.imag.reshape(len(clas.val_data), 64, 100, 1)
+                train_data_real = clas.train_data[:,0,:,:,:]
+                train_data_imag = clas.train_data[:,1,:,:,:]
+                val_data_real = clas.val_data[:,0,:,:,:]
+                val_data_imag = clas.val_data[:,1,:,:,:]
                 
                 'save history of training real values'
-                clas.hist_real = clas.vae_real.fit(train_data_real, epochs=100, batch_size=32, validation_data = (val_data_real))
-                clas.hist_imag = clas.vae_imag.fit(train_data_imag, epochs=50, batch_size=32, validation_data = (val_data_imag))
+                clas.hist_real = clas.vae_real.fit(train_data_real, epochs=100, batch_size=32)
+                clas.hist_imag = clas.vae_imag.fit(train_data_imag, epochs=50, batch_size=32)
                     
     'if you have trained local model by yourself, you might also want to save them'
     # for clas in main_server.classes:
