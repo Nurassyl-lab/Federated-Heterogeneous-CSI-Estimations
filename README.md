@@ -280,6 +280,20 @@ We end up with this performances.
 | model 2 | 0.1198 | 0.0918 | 0.1125 |
 | model 3 | 0.1271 | 0.1085 | 0.1001 |
 
+# Analysis of VAE encoder data.
+
+`z` is generated encoded features (output of vae model).
+
+Information of encoded features of data with heterogeneity 10%.
+
+`im_mean`, `im_log_var`, `rl_mean`, and `rl_log_var` are outputs of vae model
+`im_z_var`, `im_z_mean`, and `rl_z_var`, `rl_z_mean` are manually computed from `z`, using `np.var` and `np.mean` functions.
+![data4](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het10.png)
+
+Information of encoded features of data with heterogeneity 50%
+![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het50.png)
+
+
 # My observations
 ---
 Graveyard of failed ideas. 
