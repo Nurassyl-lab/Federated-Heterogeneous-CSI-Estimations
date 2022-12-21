@@ -7,10 +7,11 @@ The repo may not be well organized. This is my first big project the file manage
   1) Introduction
   2) CSI dataset
   3) Code description
-    a) Variational Autoencoder
-    b) VAE training
-    c) Analysis of VAE encoder data
-  4) My observations
+  4) Variational Autoencoder
+  5) VAE training
+  6) Analysis of VAE encoder data
+  7) My observations
+
 
 # Introduction
 ---
