@@ -131,32 +131,32 @@ Next part of the code.
             )
             self.kl_loss_tracker = keras.metrics.Mean(name="kl_loss")
 
-    @property
-    def metrics(self):
-        return[
-                self.total_loss_tracker,
-                self.reconstruction_loss_tracker,
-                self.kl_loss_tracker,
-              ]
+      @property
+      def metrics(self):
+          return[
+                  self.total_loss_tracker,
+                  self.reconstruction_loss_tracker,
+                  self.kl_loss_tracker,
+                ]
 
-    def train_step(self, data):
-        with tensorflow.GradientTape() as tape:
-            z_mean, z_log_var, z = self.encoder(data)
-            reconstruction = self.decoder(z)
-            reconstruction_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(keras.losses.mse(data, reconstruction)))
-            kl_loss = -0.5 * (1 + z_log_var - tensorflow.square(z_mean) - tensorflow.exp(z_log_var))
-            kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))
-            total_loss = reconstruction_loss + kl_loss
-        grads = tape.gradient(total_loss, self.trainable_weights)
-        self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
-        self.total_loss_tracker.update_state(total_loss)
-        self.reconstruction_loss_tracker.update_state(reconstruction_loss)
-        self.kl_loss_tracker.update_state(kl_loss)
-        return {
-            "loss": self.total_loss_tracker.result(),
-            "reconstruction_loss": self.reconstruction_loss_tracker.result(),
-            "kl_loss": self.kl_loss_tracker.result(),
-                }
+      def train_step(self, data):
+          with tensorflow.GradientTape() as tape:
+              z_mean, z_log_var, z = self.encoder(data)
+              reconstruction = self.decoder(z)
+              reconstruction_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(keras.losses.mse(data, reconstruction)))
+              kl_loss = -0.5 * (1 + z_log_var - tensorflow.square(z_mean) - tensorflow.exp(z_log_var))
+              kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))
+              total_loss = reconstruction_loss + kl_loss
+          grads = tape.gradient(total_loss, self.trainable_weights)
+          self.optimizer.apply_gradients(zip(grads, self.trainable_weights))
+          self.total_loss_tracker.update_state(total_loss)
+          self.reconstruction_loss_tracker.update_state(reconstruction_loss)
+          self.kl_loss_tracker.update_state(kl_loss)
+          return {
+              "loss": self.total_loss_tracker.result(),
+              "reconstruction_loss": self.reconstruction_loss_tracker.result(),
+              "kl_loss": self.kl_loss_tracker.result(),
+                  }
                 
 In line 71 we have a custom layer that is called Sampling. This is for generation new samples, since VAE is a generative model.
 When the layer is called:
