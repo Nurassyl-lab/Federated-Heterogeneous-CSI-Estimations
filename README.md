@@ -12,7 +12,7 @@ The repo may not be well organized. This is my first big project the file manage
 # Introduction
 ---
 Implementation of **Federated Learning** (a.k.a collaborative learning) for **CSI data** transmission between UE (user equipment) and BS (base station).
-**Federated learning** is a subpart of AI and Machine learning where the **Central model** (also refered as server model) is trained/improved using local (decentralized models) "user" models. Several implementations of Fed. learning is Amazon Alexa, Apple Siri, Google Keyboard and etc.
+**Federated learning** is a subpart of AI and Machine learning where the **Central model** (also refered as server model) is trained/improved using local (decentralized models) `user` models. Several implementations of Fed. learning is Amazon Alexa, Apple Siri, Google Keyboard and etc.
 
 # CSI dataset
 ---
@@ -70,17 +70,17 @@ When the layer is called:
         
 as you can see inputs are mean and log variance of your model input data (in this case input is CSI data). 
 
-This function takes two input tensors, "z_mean" and "z_log_var", and uses them to sample from a normal distribution. The shape of the normal distribution is determined by the batch size and number of dimensions of the input tensors. The function returns a tensor of samples from the normal distribution.
-As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this equation is an expression for sampling from a normal distribution with a mean and a standard deviation that are determined by two other variables, "mean" and "log_var". The "epsilon" variable is a random value that is drawn from a standard normal distribution (mean = 0, standard deviation = 1). This value is multiplied by the standard deviation of the normal distribution, which is computed as the exponential of 0.5 times the logarithm of the variance. This ensures that the standard deviation of the normal distribution is correctly reflected in the final sample.
+This function takes two input tensors, `z_mean` and `z_log_var`, and uses them to sample from a normal distribution. The shape of the normal distribution is determined by the batch size and number of dimensions of the input tensors. The function returns a tensor of samples from the normal distribution.
+As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this equation is an expression for sampling from a normal distribution with a mean and a standard deviation that are determined by two other variables, `mean` and `log_var`. The `epsilon` variable is a random value that is drawn from a standard normal distribution (mean = 0, standard deviation = 1). This value is multiplied by the standard deviation of the normal distribution, which is computed as the exponential of 0.5 times the logarithm of the variance. This ensures that the standard deviation of the normal distribution is correctly reflected in the final sample.
 
 The factor 0.5 is included in the equation to compute the standard deviation of a normal distribution from the logarithm of the variance. The standard deviation is half the size of the variance, so the factor 0.5 is used to correctly scale the standard deviation. The standard deviation is then used to scale a random normal tensor, which is used to sample from the normal distribution.
 
 In the same file you may find `class VAE`. 
-The VAE class has three "trackers" for mean total loss, mean reconstruction loss, and mean KL loss, which are used to keep track of the average loss during training. These trackers are instances of the "Mean" class from the "keras.metrics" module.
+The VAE class has three `trackers` for mean total loss, mean reconstruction loss, and mean KL loss, which are used to keep track of the average loss during training. These trackers are instances of the `Mean` class from the `keras.metrics` module.
 
-VAE class has a "train_step" method that is used to perform a single training step on a batch of data. The method computes the reconstruction loss, KL loss, and total loss for the batch, and uses these losses to compute gradients for the model's trainable weights. The gradients are then used to update the model's weights using the optimizer's "apply_gradients" method. The method also updates the mean loss trackers with the current batch's loss values.
+VAE class has a `train_step` method that is used to perform a single training step on a batch of data. The method computes the reconstruction loss, KL loss, and total loss for the batch, and uses these losses to compute gradients for the model's trainable weights. The gradients are then used to update the model's weights using the optimizer's `apply_gradients` method. The method also updates the mean loss trackers with the current batch's loss values.
 
-The VAE class also has a "metrics" property that returns a list of the mean loss trackers. This can be used to track the loss values during training and evaluate the performance of the model.
+The VAE class also has a `metrics` property that returns a list of the mean loss trackers. This can be used to track the loss values during training and evaluate the performance of the model.
 
 Everything in this class is pretty much straigt forward. Except `train_step` function. Let me clarify it.
 `kl_loss = -0.5 * (1 + z_log_var - tensorflow.square(z_mean) - tensorflow.exp(z_log_var))`
@@ -88,17 +88,17 @@ This line of code computes the KL loss, which is a measure of the difference bet
 
 The KL loss is computed as follows:
 
-The term "1 + z_log_var" represents the logarithm of the variance of the latent distribution.
+The term `1 + z_log_var` represents the logarithm of the variance of the latent distribution.
 
-The term "tensorflow.square(z_mean)" represents the square of the mean of the latent distribution.
+The term `tensorflow.square(z_mean)` represents the square of the mean of the latent distribution.
 
-The term "tensorflow.exp(z_log_var)" represents the variance of the latent distribution.
+The term `tensorflow.exp(z_log_var)` represents the variance of the latent distribution.
 
-The terms "1 + z_log_var", "tensorflow.square(z_mean)", and "tensorflow.exp(z_log_var)" are subtracted from each other and multiplied by -0.5 to compute the KL loss.
+The terms `1 + z_log_var`, `tensorflow.square(z_mean)`, and `tensorflow.exp(z_log_var)` are subtracted from each other and multiplied by -0.5 to compute the KL loss.
 
-The factor -0.5 is included in the equation to compute the KL loss as a common convention in machine learning, and to scale the KL loss to a more manageable value. The variance is represented by the term "tensorflow.exp(z_log_var)" because the logarithm of the variance is equal to the logarithm of the square of the standard deviation, and taking the exponential of the logarithm of a value is equivalent to taking the square root of the value. Therefore, the term "tensorflow.exp(z_log_var)" represents the square root of the variance, which is equal to the standard deviation. The standard deviation is a measure of the spread of the latent distribution.
+The factor -0.5 is included in the equation to compute the KL loss as a common convention in machine learning, and to scale the KL loss to a more manageable value. The variance is represented by the term `tensorflow.exp(z_log_var)` because the logarithm of the variance is equal to the logarithm of the square of the standard deviation, and taking the exponential of the logarithm of a value is equivalent to taking the square root of the value. Therefore, the term `tensorflow.exp(z_log_var)` represents the square root of the variance, which is equal to the standard deviation. The standard deviation is a measure of the spread of the latent distribution.
 
-In line `kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))` of code computes the mean KL loss over the batch of data by applying the "reduce_mean" function to the KL loss tensor. The "reduce_mean" function computes the mean of a tensor along a particular axis. In this case, the "reduce_sum" function is used to sum the KL loss values over the batch axis (axis=1), and the result is passed as an argument to the "reduce_mean" function. This results in a scalar value that represents the mean KL loss over the batch.
+In line `kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))` of code computes the mean KL loss over the batch of data by applying the `reduce_mean` function to the KL loss tensor. The `reduce_mean` function computes the mean of a tensor along a particular axis. In this case, the `reduce_sum` function is used to sum the KL loss values over the batch axis (axis=1), and the result is passed as an argument to the `reduce_mean` function. This results in a scalar value that represents the mean KL loss over the batch.
 
 ### Setup 1: UE selection
 As for now only [setup 1] is available.
