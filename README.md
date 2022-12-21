@@ -207,6 +207,76 @@ You can use main2 to get familiar with our setup and etc.
 
 Right now i'm still running simulations, I will add more infomation regarding this project later.
 
+#VAE training (file `VAE_simulation.py`)
+"LOAD data"
+
+    def load_data(self, path):
+        'load train data'
+        print('Load original data')
+        arr = []
+        datanames = [f for f in listdir(path+'train_data/') if isfile(join(path+'train_data/', f))]
+        for data in datanames:
+            tmp = np.load(path+'train_data/'+data)
+            nump_data = np.stack((tmp.real, tmp.imag))
+            arr.append(nump_data.reshape(2, 64, 100, 1))
+        self.train_data = np.array(arr)
+
+        arr = []
+        datanames = [f for f in listdir(path+'val_data/') if isfile(join(path+'val_data/', f))]
+        for data in datanames:
+            tmp = np.load(path+'val_data/'+data)
+            nump_data = np.stack((tmp.real, tmp.imag))
+            arr.append(nump_data.reshape(2, 64, 100, 1))
+        self.val_data = np.array(arr)
+
+In this part the load function `load_data` belongs to a class `CLASS`. When it is called I provide the path to a dataset and load CSI data into each of 3 classes. Since CSI is a complex data, I split it into real and imaginary. That's why shape of both train and val data is (None, 2, 64, 100, 1). Example:
+`train_data[:, 0, :, :, :]` is only real part `train_data[:, 1, :, :, :]` is only a imaginary part.
+
+Next part of the code is model evaluation:
+
+    for clas in main_server.classes:
+        res = []
+        for data in [main_server.classes[0].val_data, main_server.classes[1].val_data, main_server.classes[2].val_data]:
+            test_data_real = data[:,0,:,:,:]
+            test_data_imag = data[:,1,:,:,:]                   
+            
+            _,_,encoded_real = clas.vae_encoder_real.predict(test_data_real)
+            _,_,encoded_imag = clas.vae_encoder_imag.predict(test_data_imag)
+                                
+            decoded_real =  clas.vae_decoder_real.predict(encoded_real)
+            decoded_imag = clas.vae_decoder_imag.predict(encoded_imag)
+            
+            mse_real = []
+            mse_imag = []
+            mse_mag = []
+            mse_phs = []
+            for i in range(len(test_data_real)):
+                y_true_real = test_data_real[i].reshape(64,100)
+                y_pred_real = decoded_real[i].reshape(64,100)
+                
+                y_true_imag = test_data_imag[i].reshape(64,100)
+                y_pred_imag = decoded_imag[i].reshape(64,100)
+                
+                mse_real.append(mean_squared_error(y_true_real, y_pred_real))
+                mse_imag.append(mean_squared_error(y_true_imag, y_pred_imag))
+            
+            res.append([np.mean(mse_real), np.mean(mse_imag)])
+        
+        for i in range(len(res)):
+            df.loc['Model'+str(clas.number+1)+'_rl', 'Data '+str(i+1)] = res[i][0]
+            df.loc['Model'+str(clas.number+1)+'_im', 'Data '+str(i+1)] = res[i][1]
+We call each class one by one and evaluate it on 3 local datas (one own data, and two other data from other classes).
+We end up with this performances.
+MSE LOSSES of real part | Data 1 | Data 2 | Data 3 |
+| model 1 | 0.1292 | 0.1199 | 0.1266 |
+| model 2 | 0.1386 | 0.1157 | 0.1286 |
+| model 3 | 0.1373 | 0.1214 | 0.1132 |
+
+MSE LOSSES of imag part | Data 1 | Data 2 | Data 3 |
+| model 1 | 0.1151 | 0.1077 | 0.1172 |
+| model 2 | 0.1198 | 0.0918 | 0.1125 |
+| model 3 | 0.1271 | 0.1085 | 0.1001 |
+
 # My observations
 ---
 Graveyard of failed ideas. 
