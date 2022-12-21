@@ -267,12 +267,14 @@ Next part of the code is model evaluation:
             df.loc['Model'+str(clas.number+1)+'_im', 'Data '+str(i+1)] = res[i][1]
 We call each class one by one and evaluate it on 3 local datas (one own data, and two other data from other classes).
 We end up with this performances.
-MSE LOSSES of real part | Data 1 | Data 2 | Data 3 |
+| MSE LOSSES of real part | Data 1 | Data 2 | Data 3 |
+| ----------------------- | ------ | ------ | ------ |
 | model 1 | 0.1292 | 0.1199 | 0.1266 |
 | model 2 | 0.1386 | 0.1157 | 0.1286 |
 | model 3 | 0.1373 | 0.1214 | 0.1132 |
 
-MSE LOSSES of imag part | Data 1 | Data 2 | Data 3 |
+| MSE LOSSES of imag part | Data 1 | Data 2 | Data 3 |
+| ----------------------- | ------ | ------ | ------ |
 | model 1 | 0.1151 | 0.1077 | 0.1172 |
 | model 2 | 0.1198 | 0.0918 | 0.1125 |
 | model 3 | 0.1271 | 0.1085 | 0.1001 |
