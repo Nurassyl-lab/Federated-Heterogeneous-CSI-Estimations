@@ -53,55 +53,25 @@ In our case we split dataset into 3 classes using L2-norm.
   
   CLASS 3: csi data with l2-norm value in interval [60, 65]
 
-###Variational Autoencoder:
-<br
-def define_VAE_CSI_MODEL():
-    latent_dim = 8*5
+# Variational Autoencoder:
+In VAE_CSI_MODEL I have a function <br def define_VAE_CSI_MODEL(): /> that is used in to create vae models.
+I use simple CNN structure in order to do the compression and decompression.
+Note! I use 2 different vae models for complex csi data, one is for real part, another is for imaginary. But they follow the same structure.
 
-    encoder_inputs = keras.Input(shape=(64, 100, 1))
-    x = layers.Conv2D(16, (3,3), activation="tanh", padding='same',name = 'h1')(encoder_inputs)
-    x = layers.MaxPooling2D((2,2), name = 'h2')(x)#32 50
-    
-    x = layers.Conv2D(32, (3,3), activation="tanh", padding='same',name = 'h3')(x)
-    x = layers.MaxPooling2D((2,2), name = 'h4')(x)#16 25
-    
-    x = layers.Conv2D(64, (3,3), activation="tanh", padding='same',name = 'h5')(x)
-    x = layers.MaxPooling2D((2,5), name = 'h6')(x)#8 5
-    
-    x = layers.Flatten()(x)
-
-    z_mean = layers.Dense(latent_dim, name="z_mean")(x)
-    z_log_var = layers.Dense(latent_dim, name="z_log_var")(x)
-    z = Sampling()([z_mean, z_log_var])
-    vae_encoder_imag = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder_imag")
-
-    latent_inputs = keras.Input(shape=(latent_dim,))
-    
-    x = keras.layers.Dense(40, name = 'h7')(latent_inputs)
-    x = keras.layers.Reshape((8, 5, 1), name = 'h8')(x)
-    
-    x = layers.Conv2D(64, (3,3), activation="tanh", padding='same',name = 'h9')(x)
-    x = layers.UpSampling2D((2,5), name = 'h10')(x)#16 25
-    
-    x = layers.Conv2D(64, (3,3), activation="tanh", padding='same',name = 'h11')(x)
-    x = layers.UpSampling2D((2,2), name = 'h12')(x)#32 50
-
-    x = layers.Conv2D(64, (3,3), activation="tanh", padding='same',name = 'h13')(x)
-    x = layers.UpSampling2D((2,2), name = 'h14')(x)#64 100
-
-    decoder_outputs = layers.Conv2D(1, (3,3), activation="tanh", padding='same',name = 'h15')(x)
-    vae_decoder_imag = keras.Model(latent_inputs, decoder_outputs, name="decoder_imag")
-    vae_imag = VAE(vae_encoder_imag, vae_decoder_imag)
-    vae_imag.compile(optimizer=keras.optimizers.Adam())
-    
-    vae_encoder_real = keras.Model(encoder_inputs, [z_mean, z_log_var, z], name="encoder_real")
-    vae_decoder_real = keras.Model(latent_inputs, decoder_outputs, name="decoder_real")
-    vae_real = VAE(vae_encoder_real, vae_decoder_real)
-    vae_real.compile(optimizer=keras.optimizers.Adam())
-    
-    return vae_encoder_imag, vae_decoder_imag, vae_encoder_real, vae_decoder_real, vae_imag, vae_real
-
+In line 71 we have a custom layer that is called Sampling. This is for generation new samples, since VAE is a generative model.
+When the layer is called:
+<br 
+    def call(self, inputs):
+        z_mean, z_log_var = inputs
+        batch = tensorflow.shape(z_mean)[0]
+        dim = tensorflow.shape(z_mean)[1]
+        epsilon = tensorflow.keras.backend.random_normal(shape=(batch, dim))
+        return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon
 />
+as you can see inputs are mean and log variance of your model input data (in this case input is CSI data). 
+This function takes two input tensors, "z_mean" and "z_log_var", and uses them to sample from a normal distribution. The shape of the normal distribution is determined by the batch size and number of dimensions of the input tensors. The function returns a tensor of samples from the normal distribution.
+As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this equation is an expression for sampling from a normal distribution with a mean and a standard deviation that are determined by two other variables, "mean" and "log_var". The "epsilon" variable is a random value that is drawn from a standard normal distribution (mean = 0, standard deviation = 1). This value is multiplied by the standard deviation of the normal distribution, which is computed as the exponential of 0.5 times the logarithm of the variance. This ensures that the standard deviation of the normal distribution is correctly reflected in the final sample.
+The factor 0.5 is included in the equation to compute the standard deviation of a normal distribution from the logarithm of the variance. The standard deviation is half the size of the variance, so the factor 0.5 is used to correctly scale the standard deviation. The standard deviation is then used to scale a random normal tensor, which is used to sample from the normal distribution.
 
 ### Setup 1: UE selection
 As for now only [setup 1] is available.
