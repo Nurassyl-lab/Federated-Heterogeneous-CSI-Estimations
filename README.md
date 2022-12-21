@@ -207,7 +207,8 @@ You can use main2 to get familiar with our setup and etc.
 
 Right now i'm still running simulations, I will add more infomation regarding this project later.
 
-#VAE training (file `VAE_simulation.py`)
+# VAE training (file `VAE_simulation.py`)
+
 "LOAD data"
 
     def load_data(self, path):
