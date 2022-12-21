@@ -54,7 +54,7 @@ In our case we split dataset into 3 classes using L2-norm.
   CLASS 3: csi data with l2-norm value in interval [60, 65]
 
 # Variational Autoencoder:
-In VAE_CSI_MODEL I have a function <br def define_VAE_CSI_MODEL(): /> that is used in to create vae models.
+In VAE_CSI_MODEL I have a function ` def define_VAE_CSI_MODEL()` that is used in to create vae models.
 I use simple CNN structure in order to do the compression and decompression.
 Note! I use 2 different vae models for complex csi data, one is for real part, another is for imaginary. But they follow the same structure.
 
@@ -75,7 +75,27 @@ As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this e
 
 The factor 0.5 is included in the equation to compute the standard deviation of a normal distribution from the logarithm of the variance. The standard deviation is half the size of the variance, so the factor 0.5 is used to correctly scale the standard deviation. The standard deviation is then used to scale a random normal tensor, which is used to sample from the normal distribution.
 
-In the same file you may find <br class VAE />
+In the same file you may find `class VAE`. 
+The VAE class has three "trackers" for mean total loss, mean reconstruction loss, and mean KL loss, which are used to keep track of the average loss during training. These trackers are instances of the "Mean" class from the "keras.metrics" module.
+
+VAE class has a "train_step" method that is used to perform a single training step on a batch of data. The method computes the reconstruction loss, KL loss, and total loss for the batch, and uses these losses to compute gradients for the model's trainable weights. The gradients are then used to update the model's weights using the optimizer's "apply_gradients" method. The method also updates the mean loss trackers with the current batch's loss values.
+
+The VAE class also has a "metrics" property that returns a list of the mean loss trackers. This can be used to track the loss values during training and evaluate the performance of the model.
+
+Everything in this class is pretty much straigt forward. Except `train_step` function. Let me clarify it.
+This line of code computes the KL loss, which is a measure of the difference between the distribution of the latent representation and a prior distribution that is assumed to be known. The KL loss is used to encourage the latent representation to have a certain distribution, which can improve the quality of the reconstructions produced by the decoder. (More information is available on the internet)
+
+The KL loss is computed as follows:
+
+The term "1 + z_log_var" represents the logarithm of the variance of the latent distribution.
+
+The term "tensorflow.square(z_mean)" represents the square of the mean of the latent distribution.
+
+The term "tensorflow.exp(z_log_var)" represents the variance of the latent distribution.
+
+The terms "1 + z_log_var", "tensorflow.square(z_mean)", and "tensorflow.exp(z_log_var)" are subtracted from each other and multiplied by -0.5 to compute the KL loss.
+
+The factor -0.5 is included in the equation to compute the KL loss as a common convention in machine learning, and to scale the KL loss to a more manageable value. The variance is represented by the term "tensorflow.exp(z_log_var)" because the logarithm of the variance is equal to the logarithm of the square of the standard deviation, and taking the exponential of the logarithm of a value is equivalent to taking the square root of the value. Therefore, the term "tensorflow.exp(z_log_var)" represents the square root of the variance, which is equal to the standard deviation. The standard deviation is a measure of the spread of the latent distribution.
 
 ### Setup 1: UE selection
 As for now only [setup 1] is available.
