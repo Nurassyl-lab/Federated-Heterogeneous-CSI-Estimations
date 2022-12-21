@@ -60,14 +60,14 @@ Note! I use 2 different vae models for complex csi data, one is for real part, a
 
 In line 71 we have a custom layer that is called Sampling. This is for generation new samples, since VAE is a generative model.
 When the layer is called:
-<br
     
     def call(self, inputs):
         z_mean, z_log_var = inputs
         batch = tensorflow.shape(z_mean)[0]
         dim = tensorflow.shape(z_mean)[1]
         epsilon = tensorflow.keras.backend.random_normal(shape=(batch, dim))
-        return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />
+        return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon 
+        
 as you can see inputs are mean and log variance of your model input data (in this case input is CSI data). 
 This function takes two input tensors, "z_mean" and "z_log_var", and uses them to sample from a normal distribution. The shape of the normal distribution is determined by the batch size and number of dimensions of the input tensors. The function returns a tensor of samples from the normal distribution.
 As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this equation is an expression for sampling from a normal distribution with a mean and a standard deviation that are determined by two other variables, "mean" and "log_var". The "epsilon" variable is a random value that is drawn from a standard normal distribution (mean = 0, standard deviation = 1). This value is multiplied by the standard deviation of the normal distribution, which is computed as the exponential of 0.5 times the logarithm of the variance. This ensures that the standard deviation of the normal distribution is correctly reflected in the final sample.
