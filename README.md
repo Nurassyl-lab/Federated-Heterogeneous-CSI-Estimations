@@ -75,6 +75,8 @@ As from <br return z_mean + tensorflow.exp(0.5 * z_log_var) * epsilon />, this e
 
 The factor 0.5 is included in the equation to compute the standard deviation of a normal distribution from the logarithm of the variance. The standard deviation is half the size of the variance, so the factor 0.5 is used to correctly scale the standard deviation. The standard deviation is then used to scale a random normal tensor, which is used to sample from the normal distribution.
 
+In the same file you may find <br class VAE />
+
 ### Setup 1: UE selection
 As for now only [setup 1] is available.
 In this case pre-trained encoders are delivered to UE. When UE receives signal that it needs to send to BS the following algorithm is being executed under setup 1. 
