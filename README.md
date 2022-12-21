@@ -83,7 +83,10 @@ VAE class has a "train_step" method that is used to perform a single training st
 The VAE class also has a "metrics" property that returns a list of the mean loss trackers. This can be used to track the loss values during training and evaluate the performance of the model.
 
 Everything in this class is pretty much straigt forward. Except `train_step` function. Let me clarify it.
+`kl_loss = -0.5 * (1 + z_log_var - tensorflow.square(z_mean) - tensorflow.exp(z_log_var))`
 This line of code computes the KL loss, which is a measure of the difference between the distribution of the latent representation and a prior distribution that is assumed to be known. The KL loss is used to encourage the latent representation to have a certain distribution, which can improve the quality of the reconstructions produced by the decoder. (More information is available on the internet)
+
+The line `kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))` of code computes the mean KL loss over the batch of data by applying the "reduce_mean" function to the KL loss tensor. The "reduce_mean" function computes the mean of a tensor along a particular axis. In this case, the "reduce_sum" function is used to sum the KL loss values over the batch axis (axis=1), and the result is passed as an argument to the "reduce_mean" function. This results in a scalar value that represents the mean KL loss over the batch.
 
 The KL loss is computed as follows:
 
