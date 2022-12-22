@@ -226,6 +226,26 @@ In line `kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1)
 In this part the load function `load_data` belongs to a class `CLASS`. When it is called I provide the path to a dataset and load CSI data into each of 3 classes. Since CSI is a complex data, I split it into real and imaginary. That's why shape of both train and val data is (None, 2, 64, 100, 1). Example:
 `train_data[:, 0, :, :, :]` is only real part `train_data[:, 1, :, :, :]` is only a imaginary part.
 
+training part of the code:
+
+      for clas in main_server.classes:
+        print(clas.number,"class is training")
+
+        # for VAE the data is going to be split into real and complex parts, 
+        # and will be trained separately
+        train_data_real = clas.train_data[:,0,:,:,:]
+        train_data_imag = clas.train_data[:,1,:,:,:]
+        val_data_real = clas.val_data[:,0,:,:,:]
+        val_data_imag = clas.val_data[:,1,:,:,:]
+
+        'save history of training real values'
+        clas.hist_real = clas.vae_real.fit(train_data_real, epochs=100, batch_size=32)
+        clas.hist_imag = clas.vae_imag.fit(train_data_imag, epochs=50, batch_size=32)
+
+Note! `vae_real` abd `vae_imag` are just classes that combine encoder and decoder together and are not models themselves. Refer to function `define_VAE_CSI_MODEL` that returs you all necessary components (including encoder for imaginary and real parts along with their decoders).
+
+# VAE evaluation (inference)
+
 Next part of the code is model evaluation:
 
     for clas in main_server.classes:
