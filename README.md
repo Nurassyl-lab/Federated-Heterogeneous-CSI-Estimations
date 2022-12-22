@@ -297,7 +297,7 @@ We end up with this performances.
 
 (Application of this part will be explained in "Setup section")
 
-`z` is generated encoded features (output of vae model).
+`z` is generated encoded features (output of vae encoder model).
 
 Information of encoded features of data with heterogeneity 10%.
 
