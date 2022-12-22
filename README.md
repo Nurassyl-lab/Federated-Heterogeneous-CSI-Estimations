@@ -200,17 +200,6 @@ The factor -0.5 is included in the equation to compute the KL loss as a common c
 
 In line `kl_loss = tensorflow.reduce_mean(tensorflow.reduce_sum(kl_loss, axis=1))` of code computes the mean KL loss over the batch of data by applying the `reduce_mean` function to the KL loss tensor. The `reduce_mean` function computes the mean of a tensor along a particular axis. In this case, the `reduce_sum` function is used to sum the KL loss values over the batch axis (axis=1), and the result is passed as an argument to the `reduce_mean` function. This results in a scalar value that represents the mean KL loss over the batch.
 
-### Setup 1: UE selection
-As for now only [setup 1] is available.
-In this case pre-trained encoders are delivered to UE. When UE receives signal that it needs to send to BS the following algorithm is being executed under setup 1. 
-UE compresses input using all 3 encoders that it has received. Now UE has 3 different encoded features of
-
-
-main2 python code smaller copy of the main file which is not yet included in this repository.
-You can use main2 to get familiar with our setup and etc.
-
-Right now i'm still running simulations, I will add more infomation regarding this project later.
-
 # VAE training (file `VAE_simulation.py`)
 
 "LOAD data"
@@ -286,6 +275,8 @@ We end up with this performances.
 
 # Analysis of VAE encoder data.
 
+(Application of this part will be explained in "Setup section")
+
 `z` is generated encoded features (output of vae model).
 
 Information of encoded features of data with heterogeneity 10%.
@@ -297,6 +288,18 @@ Information of encoded features of data with heterogeneity 10%.
 Information of encoded features of data with heterogeneity 50%
 ![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het50.png)
 
+For this case the compression rate was 99.375%.
+
+### Setup 1: UE selection
+As for now only [setup 1] is available.
+In this case pre-trained encoders are delivered to UE. When UE receives signal that it needs to send to BS the following algorithm is being executed under setup 1. 
+UE compresses input using all 3 encoders that it has received. Now UE has 3 different encoded features of
+
+
+main2 python code smaller copy of the main file which is not yet included in this repository.
+You can use main2 to get familiar with our setup and etc.
+
+Right now i'm still running simulations, I will add more infomation regarding this project later.
 
 # My observations
 ---
