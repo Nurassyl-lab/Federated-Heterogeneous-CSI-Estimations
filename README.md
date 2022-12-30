@@ -305,7 +305,10 @@ Information of encoded features of data with heterogeneity 10%.
 `im_z_var`, `im_z_mean`, and `rl_z_var`, `rl_z_mean` are manually computed from `z`, using `np.var` and `np.mean` functions.
 ![data4](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het10.png)
 
+
+
 Information of encoded features of data with heterogeneity 50%.
+
 Label name desciription: M#D# -> M#-model_number, D#-data_number. (EX: M1D0 means that these results were obrained using model 1 on dataset of class 0) 
 
 ![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png)
