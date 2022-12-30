@@ -311,7 +311,7 @@ Information of encoded features of data with heterogeneity 50%.
 
 Label name desciription: M#D# -> M#-model_number, D#-data_number. (EX: M1D0 means that these results were obrained using model 1 on dataset of class 0) 
 
-<img src=https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png width="200"/>
+<img src=https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png width="600"/>
 
 For this case the compression rate was 99.375%.
 
