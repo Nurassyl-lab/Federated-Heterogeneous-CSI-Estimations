@@ -308,6 +308,9 @@ Information of encoded features of data with heterogeneity 10%.
 Information of encoded features of data with heterogeneity 50%
 ![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png)
 
+!Label name desciription: M#D# -> M#-model_number, D#-data_number. (EX: M1D0 means that this results were obrained using model 1 on dataset of class 0) 
+
+
 For this case the compression rate was 99.375%.
 
 ### Setup 1: UE selection
