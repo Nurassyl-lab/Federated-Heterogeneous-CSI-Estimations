@@ -306,7 +306,7 @@ Information of encoded features of data with heterogeneity 10%.
 ![data4](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het10.png)
 
 Information of encoded features of data with heterogeneity 50%
-![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/encoder_analysis_het50.png)
+![data5](https://github.com/Nurassyl-lab/Federated-Heterogeneous-CSI-Estimations/blob/main/pictures/grid.png)
 
 For this case the compression rate was 99.375%.
 
